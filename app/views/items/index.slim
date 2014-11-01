@@ -1,0 +1,28 @@
+.row
+  .col-md-9
+    .row
+      - @items.each do |item|
+        .col-md-4
+          .col-item
+            .photo
+              = image_tag "items/#{item.id}.jpg", class: 'img-responsive'
+            .info
+              .row
+                .col-md-12
+                  h5 = item.title.truncate(30)
+                  h5.price-text-color
+                    = formatted_price(item.price * current_currency_rate)
+
+              .separator.clear-left
+                p.btn-add
+                  i.fa.fa-shopping-cart>
+                  = link_to 'Add to cart', cart_add_item_path(item.id), class: 'add-to-cart', data: { item_id: item.id }, remote: true, method: :post
+                p.btn-details
+                  i.fa.fa-list
+                  = link_to 'More Details', 'https://coingate.com', target: :_blank
+              .clearfix
+  .col-md-3
+    .panel.panel-default
+      .panel-heading Cart
+      #cart-panel.panel-body
+        = render '_partials/cart'

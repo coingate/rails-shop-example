@@ -1,0 +1,23 @@
+- if @cart.items.any?
+  ul.list-unstyled
+    - @cart.items.each do |cart_item|
+      li
+        .clearfix
+          ' #{cart_item.quantity} x
+          =' cart_item.item.title.truncate(17)
+          .pull-right
+            span.text-primary
+              = formatted_price(cart_item.total_price)
+  hr
+  
+  .clearfix
+    .pull-right
+      h4 Total: #{formatted_price(@cart.subtotal)}
+  
+  .clearfix
+    .pull-left
+      = link_to fa_icon('trash') + ' Empty Cart', cart_empty_path, id: 'cart-empty', class: 'btn btn-sm btn-default', method: :delete, remote: true
+    .pull-right
+      = link_to 'Checkout', cart_path, class: 'btn btn-sm btn-success'
+- else
+  p Your shopping cart is empty.

@@ -1,0 +1,18 @@
+- title 'Orders'
+
+table.table.table-hover
+  thead
+    tr
+      th ID
+      th Status
+      th Total
+      th &nbsp;
+  tbody
+    - @orders.each do |order|
+      tr
+        td = order.id
+        td
+          span.label[class="#{label_class_by_order_status(order.status)}"] 
+            = order.status
+        td = formatted_price(order.total, order.currency)
+        td.text-right = link_to 'Details', order_path(order.id), class: 'btn btn-primary btn-xs'

@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    title #{ yield(:title) } Coingate Shop Example
+
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+
+= content_tag :body, data: { controller: controller.controller_path, action: controller.action_name }
+  nav.navbar.navbar-default.navbar-static-top
+    .container-fluid
+      = link_to 'Coingate Shop Example', root_path, class: 'navbar-brand'
+      
+      ul.nav.navbar-nav
+        li
+          = link_to 'How to buy', how_to_buy_path
+
+      ul.nav.navbar-nav.navbar-right
+        li
+          p.navbar-text
+            small = currency_rate_info
+        li.dropdown
+          a.dropdown-toggle href="javascript:;" data-toggle="dropdown"
+            =' flag_icon(currencies[current_currency.downcase.to_sym][:icon])
+            =' current_currency
+            b.caret
+          ul.dropdown-menu role="menu"
+            - currencies.each do |iso, data|
+              li = link_to flag_icon(data[:icon]) + ' ' + data[:title], set_currency_path(iso.upcase), method: :post
+        li.dropdown
+          a.dropdown-toggle href="javascript:;" data-toggle="dropdown"
+            =' fa_icon('user')
+            | My Account
+            b.caret
+          ul.dropdown-menu role="menu"
+            li = link_to fa_icon('shopping-cart') + ' Cart', cart_path
+            li = link_to fa_icon('briefcase') + ' Orders', orders_path
+
+
+  .container
+    = render_breadcrumbs
+
+    = yield
+
+  footer

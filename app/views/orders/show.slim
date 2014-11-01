@@ -1,0 +1,47 @@
+- title "Order ##{@order.id}"
+
+.clearfix
+  .pull-left
+    h1 Order ##{@order.id}
+  .pull-right
+    h1
+      .label[class="#{label_class_by_order_status(@order.status)}"] = @order.status.capitalize
+
+table.table.table-hover
+  thead
+    tr
+      th Product
+      th.text-center Quantity
+      th.text-center Price
+      th.text-center Total
+  tbody
+    - @order.order_items.includes(:item).each do |order_item|
+      tr
+        td.col-md-6
+          .media
+            .media-left
+              = image_tag "items/#{order_item.item.id}_thumb.jpg", class: 'thumbnail', alt: order_item.item.title
+            .media-body
+              h4.media-heading = order_item.item.title
+        td.text-center
+          = order_item.quantity
+        td.text-center
+          = formatted_price(order_item.price * @order.currency_rate)
+        td.text-center
+          = formatted_price(order_item.total, @order.currency)
+
+.clearfix
+  .pull-right
+    dl.dl-horizontal.cart-summary
+      dt Item(s) Subtotal
+      dd = formatted_price(@order.subtotal)
+      dt Shipping &amp; Handling
+      dd = formatted_price(@order.shipping_price)
+
+hr
+
+.clearfix
+  .pull-right
+    dl.dl-horizontal.cart-summary
+      dt Total
+      dd = formatted_price(@order.total)

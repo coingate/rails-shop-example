@@ -1,0 +1,58 @@
+- title 'Shopping Cart'
+
+.row
+  .col-md-12
+    - if @cart.items.any?
+      table.table.table-hover
+        thead
+          tr
+            th Product
+            th.text-center Quantity
+            th.text-center Price
+            th.text-center Total
+            th
+        tbody
+          - @cart.items.each do |cart_item|
+            tr
+              td.col-md-6
+                .media
+                  .media-left
+                    = image_tag "items/#{cart_item.item.id}_thumb.jpg", class: 'thumbnail', alt: cart_item.item.title
+                  .media-body
+                    h4.media-heading = cart_item.item.title
+                    span> Status:
+                    span.text-success
+                      b In Stock
+              td.text-center
+                = cart_item.quantity
+              td.text-center
+                = formatted_price(cart_item.item.price * current_currency_rate)
+              td.text-center
+                = formatted_price(cart_item.total_price)
+              td.text-right
+                = link_to fa_icon('trash') + ' Remove', cart_remove_item_path(cart_item.item.id), class: 'btn btn-danger btn-sm', method: :delete
+      
+      .clearfix
+        .pull-right
+          dl.dl-horizontal.cart-summary
+            dt Item(s) Subtotal
+            dd = formatted_price(@cart.subtotal)
+            dt Shipping &amp; Handling
+            dd = formatted_price(@cart.shipping_price)
+
+      hr
+
+      .clearfix
+        .pull-right
+          dl.dl-horizontal.cart-summary
+            dt Total
+            dd = formatted_price(@cart.total)
+
+
+
+      .clearfix
+        .pull-right
+          =' link_to fa_icon('shopping-cart') + ' Continue Shopping', root_path, class: 'btn btn-default'
+          =' link_to 'Checkout', checkout_path, class: 'btn btn-success', method: :post, data: { disable_with: 'Please Wait...' }
+    - else
+      p Your cart is empty
