@@ -9,7 +9,6 @@ gem 'therubyracer',  platforms: :ruby
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'spring', group: :development
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.0.1'
 gem 'font-awesome-rails'
@@ -18,3 +17,16 @@ gem 'famfamfam_flags_rails'
 gem 'simpleconfig'
 gem 'breadcrumbs_on_rails'
 gem 'underscore-string-rails'
+gem 'dotenv'
+
+group :development do
+  gem 'spring'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
+end
+
+group :production do
+  gem 'unicorn'
+  gem 'dotenv-deployment', require: 'dotenv/deployment'
+end
