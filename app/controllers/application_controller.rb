@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_currency_rate
-    session[:currency_rate] = 1 if session[:currency_rate].blank?
+    session[:currency_rate] = 1     if session[:currency_rate].blank?
+    session[:currency]      = 'USD' if session[:currency].blank?
   end
 
   def set_cart
@@ -21,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_currency
-    @current_currency ||= (session[:currency] || 'USD')
+    session[:currency]
   end
   helper_method :current_currency
 

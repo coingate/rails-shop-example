@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def currency_rate_info
-    "1 USD = #{session[:currency_rate]} #{current_currency}" if session[:currency] != 'USD'
+    "1 USD = #{session[:currency_rate]} #{current_currency}" if current_currency != 'USD'
   end
 
   def label_class_by_order_status(status)
