@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   delete  'cart/empty'      => 'cart#empty',        as: :cart_empty
   delete  'cart/remove/:id' => 'cart#remove_item',  as: :cart_remove_item
 
-  get 'payments/notify'
-  get 'payments/success'
-  get 'payments/check'
+  post  'payments/notify'
+  get   'payments/success'
+  get   'payments/check'
 
   get 'pages/how-to-buy' => 'pages#how_to_buy', as: :how_to_buy
 
