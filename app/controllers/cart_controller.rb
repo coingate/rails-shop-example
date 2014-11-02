@@ -43,7 +43,7 @@ class CartController < ApplicationController
     @cart.empty
 
     response = coingate_client.create_order(
-      order_id:         "RSE-ORDER-#{order.id}",
+      order_id:         "ORDER-#{(Time.now.to_f * 1e6).to_i}-#{order.id}",
       price:            order.total,
       currency:         order.currency,
       receive_currency: 'EUR',
