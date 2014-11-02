@@ -15,6 +15,6 @@ test:
 
 production:
   <<: *default
-  database: rails_shop
+  database: rails_shop_example
   username: rails_shop
   password: <%= ENV['DATABASE_PASSWORD'] %>
