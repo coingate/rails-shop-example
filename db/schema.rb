@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101141015) do
+ActiveRecord::Schema.define(version: 20141103150140) do
 
   create_table "items", force: true do |t|
     t.string   "title",                              null: false
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 20141101141015) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "order_failures", force: true do |t|
+    t.integer  "order_id",    null: false
+    t.integer  "http_status"
+    t.string   "reason"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "order_failures", ["order_id"], name: "index_order_failures_on_order_id", using: :btree
 
   create_table "order_items", force: true do |t|
     t.integer  "order_id",                                     null: false

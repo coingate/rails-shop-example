@@ -13,9 +13,9 @@ class CoingateService
     begin
       response = RestClient.post('https://sandbox.coingate.com/api/v1/orders', order_params, credentials.merge('Content-Type' => 'application/x-www-form-urlencoded'))
 
-      OpenStruct.new(success?: true, http_code: response.code, response: JSON.parse(response.to_str, symbolize_names: true))
+      response(response.code, response.to_str)
     rescue => e
-      OpenStruct.new(success?: false, http_code: e.http_code, response: e.response)
+      response(e.http_code, e.response)
     end
   end
 
@@ -27,6 +27,12 @@ class CoingateService
     rescue => e
       
     end
+  end
+
+  def response(http_code, response_body)
+    response_body = JSON.parse(response_body, symbolize_names: true) rescue response_body
+
+    OpenStruct.new(success?: http_code == 200, http_code: http_code, reason: response_body.try(:fetch, :reason, nil), response: response_body)
   end
 
   def credentials

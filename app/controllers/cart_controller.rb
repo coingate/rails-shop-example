@@ -58,8 +58,10 @@ class CartController < ApplicationController
 
       redirect_to response.response[:payment_url]
     else
-      render text: response.response
+      order.update_attribute(:status, 'failure')
+      order.order_failures.create(http_status: response.http_code, reason: response.reason, message: response.response)
+
+      redirect_to order_path(order.id), flash: { error: 'Ooops! Something wrong. Please try again or contact with support' }
     end
-    
   end
 end

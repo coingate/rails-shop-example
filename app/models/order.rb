@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
+  has_many :order_failures, dependent: :destroy
 
   scope :recent, -> { order created_at: :desc }
 

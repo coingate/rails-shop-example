@@ -18,6 +18,7 @@ module ApplicationHelper
     when 'canceled'   then 'label-danger'
     when 'pending'    then 'label-warning'
     when 'unpaid'     then 'label-default'
+    when 'failure'    then 'label-danger'
     end
   end
 
