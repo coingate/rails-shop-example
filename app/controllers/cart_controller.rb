@@ -43,14 +43,15 @@ class CartController < ApplicationController
     @cart.empty
 
     response = coingate_client.create_order(
-      order_id:         "ORDER-#{(Time.now.to_f * 1e6).to_i}-#{order.id}",
-      price:            order.total,
-      currency:         order.currency,
-      receive_currency: 'EUR',
-      description:      "Order ##{order.id}",
-      callback_url:     payments_notify_url(token: order.token),
-      success_url:      payments_success_url,
-      cancel_url:       root_url
+      order_id:             "ORDER-#{(Time.now.to_f * 1e6).to_i}-#{order.id}",
+      price:                order.total,
+      currency:             order.currency,
+      receive_currency:     'EUR',
+      description:          "Order ##{order.id}",
+      callback_url:         payments_notify_url(token: order.token),
+      success_url:          payments_success_url,
+      cancel_url:           root_url,
+      success_auto_return:  1
     )
 
     if response.success?
