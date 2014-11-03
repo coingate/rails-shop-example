@@ -35,6 +35,6 @@ class CartSession
   end
 
   def shipping_price
-    23.00 * @session[:currency_rate]
+    9.00 * @session[:currency_rate]
   end
 end
