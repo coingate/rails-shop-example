@@ -46,7 +46,7 @@ class CartController < ApplicationController
       order_id:             "ORDER-#{(Time.now.to_f * 1e6).to_i}-#{order.id}",
       price:                order.total,
       currency:             order.currency,
-      receive_currency:     'EUR',
+      receive_currency:     current_receive_currency,
       description:          "Order ##{order.id}",
       callback_url:         payments_notify_url(token: order.token),
       success_url:          payments_success_url,

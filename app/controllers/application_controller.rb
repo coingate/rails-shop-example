@@ -3,14 +3,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_currency_rate
+  before_action :set_default_settings
   before_action :set_cart
 
   private
 
-  def set_currency_rate
-    session[:currency_rate] = 1     if session[:currency_rate].blank?
-    session[:currency]      = 'USD' if session[:currency].blank?
+  def set_default_settings
+    session[:currency_rate]     ||= 1
+    session[:currency]          ||= 'USD'
+    session[:receive_currency]  ||= 'EUR'
   end
 
   def set_cart
@@ -30,6 +31,11 @@ class ApplicationController < ActionController::Base
     session[:currency_rate]
   end
   helper_method :current_currency_rate
+
+  def current_receive_currency
+    session[:receive_currency]
+  end
+  helper_method :current_receive_currency
 
   def currencies
     @currencies ||= {

@@ -1,0 +1,17 @@
+h1 My Settings
+
+= form_tag account_settings_update_path, class: 'form-horizontal' do
+  .form-group
+    label.control-label.col-sm-2 Receive Currency
+    .col-sm-10
+      ul.list-unstyled
+        - currencies.each do |currency_iso, currency_data|
+          - currency_iso = currency_iso.to_s.upcase
+          li
+            .radio
+              label
+                =' radio_button_tag :receive_currency, currency_iso, currency_iso == current_receive_currency
+                =' flag_icon(currency_data[:icon])
+                = currency_data[:title]
+
+  = submit_tag 'Update', class: 'btn btn-primary', data: { disable_with: 'Please Wait...' }

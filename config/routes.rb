@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get   'payments/success'
   get   'payments/check'
 
+  get   'account_settings'        => 'account_settings#index'
+  post  'account_settings/update' => 'account_settings#update'
+
   get 'pages/how-to-buy' => 'pages#how_to_buy', as: :how_to_buy
 
   post 'currencies/set_currency/:currency' => 'currencies#set_currency', as: :set_currency
