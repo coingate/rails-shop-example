@@ -1,11 +1,12 @@
 module ApplicationHelper
 
   def formatted_price(price, currency = nil)
-    number_with_precision(price, precision: 2) + ' ' + (currency || current_currency)
+    currency = (currency || current_currency)
+    number_with_precision(price, precision: currency == 'BTC' ? 4 : 2) + ' ' + currency
   end
 
   def flag_icon(country_iso)
-    content_tag(:i, '', class: "famfamfam-flag-#{country_iso}")
+    content_tag(:i, '', class: country_iso == 'btc' ? 'icon-bitcoin' : "famfamfam-flag-#{country_iso}")
   end
 
   def currency_rate_info

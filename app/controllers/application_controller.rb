@@ -34,7 +34,8 @@ class ApplicationController < ActionController::Base
   def currencies
     @currencies ||= {
       usd: { title: 'United States dollar', icon: 'us' },
-      eur: { title: 'Euro', icon: 'eu' }
+      eur: { title: 'Euro', icon: 'eu' },
+      btc: { title: 'Bitcoin', icon: 'btc' }
     }
   end
   helper_method :currencies
