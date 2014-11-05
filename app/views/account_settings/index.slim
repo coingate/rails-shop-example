@@ -11,7 +11,7 @@ h1 My Settings
             .radio
               label
                 =' radio_button_tag :receive_currency, currency_iso, currency_iso == current_receive_currency
-                =' flag_icon(currency_data[:icon])
+                =' currency_icon(currency_iso.downcase)
                 = currency_data[:title]
 
   = submit_tag 'Update', class: 'btn btn-primary', data: { disable_with: 'Please Wait...' }

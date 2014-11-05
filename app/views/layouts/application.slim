@@ -23,12 +23,12 @@ html
             small = currency_rate_info
         li.dropdown
           a.dropdown-toggle href="javascript:;" data-toggle="dropdown"
-            =' flag_icon(currencies[current_currency.downcase.to_sym][:icon])
+            =' currency_icon(current_currency.downcase)
             =' current_currency
             b.caret
           ul.dropdown-menu role="menu"
             - currencies.each do |iso, data|
-              li = link_to flag_icon(data[:icon]) + ' ' + data[:title], set_currency_path(iso.upcase), method: :post
+              li = link_to currency_icon(iso) + ' ' + data[:title], set_currency_path(iso.upcase), method: :post
         li.dropdown
           a.dropdown-toggle href="javascript:;" data-toggle="dropdown"
             =' fa_icon('user')

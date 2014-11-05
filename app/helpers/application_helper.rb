@@ -5,8 +5,8 @@ module ApplicationHelper
     number_with_precision(price, precision: currency == 'BTC' ? 4 : 2) + ' ' + currency
   end
 
-  def flag_icon(country_iso)
-    content_tag(:i, '', class: country_iso == 'btc' ? 'icon-bitcoin' : "famfamfam-flag-#{country_iso}")
+  def currency_icon(currency_iso)
+     content_tag(:i, '', class: "currency-icon-#{currency_iso}")
   end
 
   def currency_rate_info
