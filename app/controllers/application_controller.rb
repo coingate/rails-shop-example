@@ -37,6 +37,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_receive_currency
 
+  def currency_round_value
+    current_currency == 'BTC' ? 4 : 2
+  end
+  helper_method :currency_round_value
+
   def currencies
     @currencies ||= {
       usd: { title: 'United States dollar' },

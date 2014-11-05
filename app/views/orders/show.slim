@@ -28,7 +28,7 @@ table.table.table-hover
         td.text-center
           = order_item.quantity
         td.text-center
-          = formatted_price(order_item.price * @order.currency_rate)
+          = formatted_price(order_item.price, @order.currency)
         td.text-center
           = formatted_price(order_item.total, @order.currency)
 
@@ -36,9 +36,9 @@ table.table.table-hover
   .pull-right
     dl.dl-horizontal.cart-summary
       dt Item(s) Subtotal
-      dd = formatted_price(@order.subtotal)
+      dd = formatted_price(@order.subtotal, @order.currency)
       dt Shipping &amp; Handling
-      dd = formatted_price(@order.shipping_price)
+      dd = formatted_price(@order.shipping_price, @order.currency)
 
 hr
 
@@ -46,4 +46,4 @@ hr
   .pull-right
     dl.dl-horizontal.cart-summary
       dt Total
-      dd = formatted_price(@order.total)
+      dd = formatted_price(@order.total, @order.currency)

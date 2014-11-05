@@ -35,7 +35,7 @@ class CartController < ApplicationController
     )
 
     @cart.items.each do |cart_item|
-      order.order_items.create(item_id: cart_item.item.id, quantity: cart_item.quantity, price: (cart_item.item.price * order.currency_rate).round(2))
+      order.order_items.create(item_id: cart_item.item.id, quantity: cart_item.quantity, price: (cart_item.item.price * order.currency_rate).round(order.currency == 'BTC' ? 4 : 2))
     end
 
     session[:current_order] = order.id

@@ -2,7 +2,12 @@ module ApplicationHelper
 
   def formatted_price(price, currency = nil)
     currency = (currency || current_currency)
-    number_with_precision(price, precision: currency == 'BTC' ? 4 : 2) + ' ' + currency
+
+    if currency == 'BTC'
+      "#{price} #{currency}"
+    else
+      number_with_precision(price, precision: 2).to_s + ' ' + currency
+    end
   end
 
   def currency_icon(currency_iso)

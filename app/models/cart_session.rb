@@ -17,7 +17,7 @@ class CartSession
       a << OpenStruct.new(
         item:         item,
         quantity:     @session[:cart][item.id.to_s],
-        total_price:  ((item.price * @session[:cart][item.id.to_s]) * @session[:currency_rate]).round(@session[:currency] == 'BTC' ? 4 : 2)
+        total_price:  ((item.price * @session[:cart][item.id.to_s]) * @session[:currency_rate]).round(currency_round_value)
       )
     end
   end
@@ -35,6 +35,10 @@ class CartSession
   end
 
   def shipping_price
-    9.00 * @session[:currency_rate]
+    (9.00 * @session[:currency_rate]).round(currency_round_value)
+  end
+
+  def currency_round_value
+    @session[:currency] == 'BTC' ? 4 : 2
   end
 end
