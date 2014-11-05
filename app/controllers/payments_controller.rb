@@ -1,5 +1,7 @@
 class PaymentsController < ApplicationController
-  skip_before_filter :verify_authenticity_token, only: :notify
+  skip_before_filter  :verify_authenticity_token, only: :notify
+  before_action       :set_current_order, only: [:check, :success]
+  before_action       :check_status_immediately, only: :success
 
   def notify
     id    = params[:order_id].split('-').last
@@ -15,8 +17,18 @@ class PaymentsController < ApplicationController
   end
 
   def check
-    order = Order.find_by(id: session[:current_order])
+    render json: @order
+  end
 
-    render json: order
+  private
+
+  def set_current_order
+    @order = Order.find_by(id: session[:current_order])
+  end
+
+  def check_status_immediately
+    @order.fetch_and_update_status
+
+    redirect_to order_path(@order.id) and return if @order.status != 'pending'
   end
 end

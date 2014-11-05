@@ -26,7 +26,7 @@ class Order < ActiveRecord::Base
     case coingate_status
     when 'paid'       then paid!
     when 'canceled'   then cancel!
-    else unpaid!
+    when 'expired'    then unpaid!
     end
   end
 
