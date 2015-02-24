@@ -34,4 +34,11 @@ class Order < ActiveRecord::Base
     cg_order = CoingateService.new.get_order(coingate_id)
     update_status_by_coingate(cg_order.response[:status])
   end
+
+  def description
+    items = []
+    order_items.map { |order_item| items << [order_item.quantity, order_item.item.title].join(' × ') }
+    
+    items.join(', ')
+  end
 end
