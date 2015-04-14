@@ -1,10 +1,10 @@
 [
-  { title: 'Polpettina Vinyl Toy', price: 12 },
-  { title: 'Bruttino Vinyl Toy', price: 12 },
-  { title: 'Happy Om Nom Plush', price: 8.50 },
-  { title: 'GitHub Octocat', price: 40 },
-  { title: 'Skeletrino Kitty', price: 25 },
-  { title: 'Latte Moofia', price: 20 }
+  { title: 'Brewed Coffee', price: 1 },
+  { title: 'Cafe Mocha', price: 3 },
+  { title: 'Caramel Macchiato', price: 3 },
+  { title: 'Caramel Mocha', price: 4 },
+  { title: 'Espresso Con Panna', price: 5 },
+  { title: 'Espresso', price: 2 }
 ].each do |item|
   Item.create(item) unless Item.where(title: item[:title]).exists?
 end
