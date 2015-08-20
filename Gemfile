@@ -22,10 +22,10 @@ group :development do
   gem 'spring'
   gem 'capistrano'
   gem 'capistrano-rails'
-  gem 'capistrano3-unicorn'
+  gem 'capistrano3-puma'
 end
 
 group :production do
-  gem 'unicorn'
+  gem 'puma'
   gem 'dotenv-deployment', require: 'dotenv/deployment'
 end

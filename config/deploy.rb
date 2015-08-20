@@ -7,4 +7,4 @@ set :keep_releases, 5
 set :linked_files,  %w( .env )
 set :linked_dirs,   %w( log tmp/pids tmp/sockets )
 
-after 'deploy', 'unicorn:restart'
+# after 'deploy', 'unicorn:restart'
