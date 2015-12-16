@@ -7,7 +7,7 @@ class PaymentsController < ApplicationController
     id    = params[:order_id].split('-').last
     order = Order.find_by(id: id)
     
-    order.update_status_by_coingate(params[:status]) if order && order.token == params[:token]
+    order.fetch_and_update_status if order && order.token == params[:token]
 
     render nothing: true
   end
