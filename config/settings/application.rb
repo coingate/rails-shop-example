@@ -1,9 +1,9 @@
 SimpleConfig.for :application do
   group :api do
     group :coingate do
-      set :app_id, 1
-      set :api_key, 'ITYEXgZuJtRpWvKPsQlkUx'
-      set :api_secret, 'a9cQlsehY86wHOXUAojrdxBGFftvmSgC'
+      set :app_id, ENV["COINGATE_APP_ID"]
+      set :api_key, ENV["COINGATE_API_KEY"]
+      set :api_secret, ENV["COINGATE_API_SECRET"]
     end
   end
 end
