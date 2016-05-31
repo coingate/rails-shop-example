@@ -8,25 +8,20 @@ class Order < ActiveRecord::Base
     total - shipping_price
   end
 
-  def paid!
-    update_attribute(:status, 'paid')
+  def set_status(new_status)
+    update_attribute(:status, new_status)
   end
 
-  def cancel!
-    update_attribute(:status, 'canceled')
-  end
-
-  def unpaid!
-    update_attribute(:status, 'unpaid')
-  end
-
+  # https://developer.coingate.com/docs/order-statuses
   def update_status_by_coingate(coingate_status)
     update_attribute(:coingate_status, coingate_status)
 
     case coingate_status
-    when 'paid'       then paid!
-    when 'canceled'   then cancel!
-    when 'expired'    then unpaid!
+      when 'paid'       then set_status('paid')
+      when 'canceled'   then set_status('canceled')
+      when 'expired'    then set_status('unpaid') # Or set as expired
+      when 'confirming' then set_status('confirming') # Or set as processing or payment_processing
+      when 'refunded'   then set_status('refunded')
     end
   end
 
