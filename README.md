@@ -8,3 +8,8 @@
 6. Create Api Access Key. https://sandbox.coingate.com/account/apps
 7. Create .env file and add API credentials, see `config/settings/application.rb`
 8. Run `rails server`
+
+# Important links
+
+* API Documentation: https://developer.coingate.com/
+* CoinGate Support: http://support.coingate.com/
