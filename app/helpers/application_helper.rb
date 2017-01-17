@@ -20,10 +20,10 @@ module ApplicationHelper
 
   def label_class_by_order_status(status)
     case status
-      when 'paid'       then 'label-success'
-      when 'canceled'   then 'label-danger'
-      when 'pending'    then 'label-warning'
-      when 'failure'    then 'label-danger'
+      when 'paid'           then 'label-success'
+      when 'canceled'       then 'label-danger'
+      when 'pending'        then 'label-warning'
+      when 'invalid'        then 'label-danger'
       else 'label-default'
     end
   end

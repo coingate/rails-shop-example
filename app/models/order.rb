@@ -22,6 +22,7 @@ class Order < ActiveRecord::Base
       when 'expired'    then set_status('unpaid') # Or set as expired
       when 'confirming' then set_status('confirming') # Or set as processing or payment_processing
       when 'refunded'   then set_status('refunded')
+      when 'invalid'    then set_status('invalid')
     end
   end
 
