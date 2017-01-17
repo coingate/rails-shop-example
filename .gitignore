@@ -7,3 +7,4 @@
 /.env
 /config/deploy/*
 /.idea
+/config/settings/local.rb
