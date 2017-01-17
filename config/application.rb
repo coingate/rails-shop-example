@@ -7,7 +7,11 @@ require 'dotenv'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv.overload('/home/coingate/app/shared/.env') if File.exists?('/home/coingate/app/shared/.env')
+if File.exists?('/home/coingate/app/shared/.env')
+  Dotenv.overload('/home/coingate/app/shared/.env')
+else
+  Dotenv.overload
+end
 
 module RailsShopExample
   class Application < Rails::Application
