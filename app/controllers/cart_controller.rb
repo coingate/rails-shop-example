@@ -44,8 +44,8 @@ class CartController < ApplicationController
 
     response = coingate_client.create_order(
       order_id:             "ORDER-#{(Time.now.to_f * 1e6).to_i}-#{order.id}",
-      price:                order.total,
-      currency:             order.currency,
+      price_amount:         order.total,
+      price_currency:       order.currency,
       receive_currency:     current_receive_currency,
       title:                "Order ##{order.id}",
       description:          order.description,

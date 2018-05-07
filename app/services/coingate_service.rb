@@ -4,14 +4,14 @@ class CoingateService
   end
 
   def currency_rate(from, to)
-    response = RestClient.get("#{Settings.api.coingate.url}/api/v1/currencies/rate/#{from}/#{to}", credentials)
+    response = RestClient.get("#{Settings.api.coingate.url}/v2/rates/merchant/#{from}/#{to}", credentials)
 
-    JSON.parse(response.to_str)['rate'].to_f
+    response.to_str
   end
 
   def create_order(order_params = {})
     begin
-      response = RestClient.post("#{Settings.api.coingate.url}/api/v1/orders", order_params, credentials.merge('Content-Type' => 'application/x-www-form-urlencoded'))
+      response = RestClient.post("#{Settings.api.coingate.url}/v2/orders", order_params, credentials.merge('Content-Type' => 'application/x-www-form-urlencoded'))
 
       response(response.code, response.to_str)
     rescue => e
@@ -20,7 +20,7 @@ class CoingateService
   end
 
   def get_order(id)
-    response = RestClient.get("#{Settings.api.coingate.url}/api/v1/orders/#{id}", credentials)
+    response = RestClient.get("#{Settings.api.coingate.url}/v2/orders/#{id}", credentials)
 
     begin
       OpenStruct.new(success?: true, http_code: response.code, response: JSON.parse(response.to_str, symbolize_names: true))
@@ -36,10 +36,6 @@ class CoingateService
   end
 
   def credentials
-    nonce     = (Time.now.to_f * 1e6).to_i
-    message   = "#{nonce}#{Settings.api.coingate.app_id}#{Settings.api.coingate.api_key}"
-    signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), Settings.api.coingate.api_secret, message)
-
-    { 'Access-Nonce' => nonce, 'Access-Key' => Settings.api.coingate.api_key, 'Access-Signature' => signature }
+    { Authorization: "Token #{Settings.api.coingate.auth_token}" }
   end
 end
