@@ -6,7 +6,7 @@ class CoingateService
   def currency_rate(from, to)
     response = RestClient.get("#{Settings.api.coingate.url}/v2/rates/merchant/#{from}/#{to}", credentials)
 
-    response.to_str
+    response.to_str.to_f
   end
 
   def create_order(order_params = {})
