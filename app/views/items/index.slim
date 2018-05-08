@@ -11,7 +11,7 @@
                 .col-md-12
                   h5 = item.title.truncate(30)
                   h5.price-text-color
-                    = formatted_price((item.price * current_currency_rate).round(currency_round_value))
+                    = formatted_price((item.price * current_currency_rate.to_d).round(currency_round_value))
 
               .separator.clear-left
                 p.btn-add
