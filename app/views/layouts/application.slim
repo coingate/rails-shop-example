@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta charset="utf-8"
-    title #{ yield(:title) } Coingate Shop Example
+    title #{ yield(:title) } CoinGate Shop Demo
 
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
@@ -11,11 +11,13 @@ html
 = content_tag :body, data: { controller: controller.controller_path, action: controller.action_name }
   nav.navbar.navbar-default.navbar-static-top
     .container-fluid
-      = link_to 'Coingate Shop Example', root_path, class: 'navbar-brand'
+      = link_to 'CoinGate Shop Demo', root_path, class: 'navbar-brand'
       
       ul.nav.navbar-nav
+        li = link_to fa_icon('question') + ' Read the Guide', 'https://support.coingate.com/en/74/guide-to-using-the-coingate-example-demo-shop', target: :_blank
         li = link_to fa_icon('code') + ' Source Code', 'https://github.com/coingate/rails-shop-example', target: :_blank
-        li = link_to fa_icon('question-circle') + ' How to buy', 'https://cgsupport.groovehq.com/knowledge_base/topics/how-can-i-test-your-service-without-signing-up', target: :_blank
+        li = link_to fa_icon('cogs') + ' Integration', 'https://coingate.com/accept-bitcoin', target: :_blank
+        li = link_to fa_icon('home') + ' Homepage', 'https://coingate.com', target: :_blank
 
       ul.nav.navbar-nav.navbar-right
         li
@@ -38,6 +40,7 @@ html
             li = link_to fa_icon('cogs') + ' My Settings', account_settings_path
             li = link_to fa_icon('shopping-cart') + ' Cart', cart_path
             li = link_to fa_icon('briefcase') + ' Orders', orders_path
+            li = link_to fa_icon('user-plus') + ' Sign Up', 'https://coingate.com/sign_up'
 
 
   .container

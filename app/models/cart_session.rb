@@ -39,6 +39,6 @@ class CartSession
   end
 
   def currency_round_value
-    @session[:currency] == 'BTC' ? 4 : 2
+    CoingateService::CRYPTO_CURRENCIES.include?(@session[:currency]) ? 6 : 2
   end
 end

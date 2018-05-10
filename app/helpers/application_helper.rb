@@ -3,7 +3,7 @@ module ApplicationHelper
   def formatted_price(price, currency = nil)
     currency = (currency || current_currency)
 
-    if currency == 'BTC'
+    if CoingateService::CRYPTO_CURRENCIES.include? currency
       "#{price} #{currency}"
     else
       number_with_precision(price, precision: 2).to_s + ' ' + currency

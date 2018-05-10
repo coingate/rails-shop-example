@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   def index
-    @orders = Order.recent
+    @orders = Order.recent.limit(100)
   end
 
   def show

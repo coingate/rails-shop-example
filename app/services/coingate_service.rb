@@ -1,4 +1,6 @@
 class CoingateService
+  CRYPTO_CURRENCIES = %(BTC ETH)
+  
   def initialize
 
   end

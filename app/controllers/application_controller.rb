@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_receive_currency
 
   def currency_round_value
-    current_currency == 'BTC' ? 4 : 2
+    CoingateService::CRYPTO_CURRENCIES.include?(current_currency) ? 6 : 2
   end
   helper_method :currency_round_value
 
@@ -46,7 +46,9 @@ class ApplicationController < ActionController::Base
     @currencies ||= {
       usd: { title: 'United States dollar' },
       eur: { title: 'Euro' },
-      btc: { title: 'Bitcoin' }
+      cad: { title: 'Canadian dollar' },
+      btc: { title: 'Bitcoin' },
+      eth: { title: 'Ethereum' }
     }
   end
   helper_method :currencies
