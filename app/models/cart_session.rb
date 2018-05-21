@@ -35,7 +35,7 @@ class CartSession
   end
 
   def shipping_price
-    (2.00 * @session[:currency_rate]).round(currency_round_value)
+    (0.00 * @session[:currency_rate]).round(currency_round_value)
   end
 
   def currency_round_value
