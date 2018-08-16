@@ -12,7 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.0.1'
 gem 'font-awesome-rails'
-gem 'rest_client'
+gem 'rest-client', '1.8.0'
 gem 'simpleconfig'
 gem 'breadcrumbs_on_rails'
 gem 'underscore-string-rails'
